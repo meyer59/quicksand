@@ -13,6 +13,7 @@ Quicksand is an Artisan command that you can run in your scheduler daily.
 - If you are using Laravel 5.6 or higher, use version `2.0` of this package.
 - If you are using Laravel 5.5 and running PHP 7.1 or higher, use version `1.0` of this package.
 - If you are using Laravel 5.4 or lower, or PHP 7.0 or lower, please use version `0.2` of this package.
+- Laravel 12 is supported. PHP 8.2 or higher is required.
 
 ## Installation
 
@@ -46,7 +47,17 @@ Quicksand is an Artisan command that you can run in your scheduler daily.
     ]
     ```
 
-5. Schedule the command in `app/Console/Kernel.php`:
+5. Schedule the command. 
+
+    **Laravel 11 / 12** — add to `routes/console.php`:
+
+    ```php
+    use Illuminate\Support\Facades\Schedule;
+
+    Schedule::command('quicksand:run')->daily();
+    ```
+
+    **Laravel 8 / 9 / 10** — add to `app/Console/Kernel.php`:
 
     ```php
     protected function schedule(Schedule $schedule)
@@ -55,6 +66,7 @@ Quicksand is an Artisan command that you can run in your scheduler daily.
             ->daily();
     }
     ```
+
 ### Using a Custom Log File
 
 If you are using Laravel 5.6 or higher, you can customize the logger Quicksand uses by adding a `quicksand` channel to your `logging.php` config file like so:

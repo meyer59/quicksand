@@ -15,6 +15,11 @@ class QuicksandServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/quicksand.php',
+            'quicksand'
+        );
+
         $this->app->singleton(DeleteOldSoftDeletes::class);
         $this->commands([DeleteOldSoftDeletes::class]);
     }
